@@ -1,6 +1,6 @@
 "use strict";
 
-let game, mgr;
+let game = null, mgr;
 let thumbnail, spaceship;
 let themeSong, laserSound;
 
@@ -14,6 +14,11 @@ function preload() {
 function setup() {
   createCanvas(800, 600);
   mgr = new SceneManager();
+
+  mgr.addScene ( Intro );
+  //*** addScene(..) returns object with class instance called oScene ***
+  game = mgr.addScene(Game).oScene;
+
   mgr.thumbnail = thumbnail;
   mgr.spaceship = spaceship;
   mgr.wire();

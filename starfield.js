@@ -5,8 +5,6 @@ class StarField {
 	constructor() {
       this.numStars = width * 2;
       this.worldSize = width * 2;
-      // distToViewPlane is another way of setting field of view (fov) w/o using angle/trig calcs
-      this.distToViewPlane = 100;
       this.starX = [];
       this.starY = [];
       this.starZ = [];
@@ -116,8 +114,10 @@ class StarField {
    // convert worldX, worldY, worldZ to screen coords (screenX & screenY)
    // simplified version of project(..) function in outrun cic code
    perspectiveTransform = (xx, yy, zz) => {
-      let scale = this.distToViewPlane / zz;
-      this.screenX = int(xx * scale);
-      this.screenY = int(yy * scale);
+      if (game) {
+         let scale = game.distToViewPlane / zz;
+         this.screenX = int(xx * scale);
+         this.screenY = int(yy * scale);
+      }
    }
 }

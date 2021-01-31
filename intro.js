@@ -16,6 +16,6 @@ class Intro {
 
    keyPressed = () => {
       this.sceneManager.showScene( Game );
-      console.log("Intro class -> keyPressed()");
+      //console.log("Intro class -> keyPressed()");
    }
 }
