@@ -113,7 +113,7 @@ class StarField {
       this.starY[index] = int((this.worldX * sin(angle)) + (this.worldY * cos(angle)));
    }
 
-   // convert worldX, worldY, worldZ to screen coords
+   // convert worldX, worldY, worldZ to screen coords (screenX & screenY)
    // simplified version of project(..) function in outrun cic code
    perspectiveTransform = (xx, yy, zz) => {
       let scale = this.distToViewPlane / zz;
