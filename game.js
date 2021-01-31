@@ -17,6 +17,7 @@ class Game {
       this.screenY;
       this.halfWidth = width*0.5;
       this.halfHeight = height*0.5;
+      this.speed = 10;
       this.initStars();
    }
 
@@ -24,16 +25,31 @@ class Game {
       this.starX = [];
       this.starY = [];
       this.starZ = [];
-      this.prevScreenX = [];
-      this.prevScreenY = [];
-
+ 
       for (let index=0; index<this.numStars; index++) {
-         this.worldX = int(random(-this.worldSize, this.worldSize));
-         this.worldY = int(random(-this.worldSize, this.worldSize));
-         this.worldZ = int(random(0, this.worldSize));
-         this.starX.push(this.worldX);
-         this.starY.push(this.worldY);
-         this.starZ.push(this.worldZ);
+         this.starX.push(0);
+         this.starY.push(0);
+         this.starZ.push(0);
+         this.placeNewStar(index, int(random(0, this.worldSize)));
+      }
+   }
+
+   placeNewStar = (index, zz) => {
+      this.worldX = int(random(-this.worldSize, this.worldSize));
+      this.worldY = int(random(-this.worldSize, this.worldSize));
+      this.worldZ = zz;
+      this.starX[index] = this.worldX;
+      this.starY[index] = this.worldY;
+      this.starZ[index] = this.worldZ;
+   }
+
+   updateStars = () => {
+      for (let index=0; index<this.numStars; index++) {
+         this.worldZ = this.starZ[index] - this.speed;
+         this.starZ[index] = this.worldZ;
+         if (this.worldZ < 1) {
+            this.placeNewStar(index, this.worldSize);
+         }
       }
    }
 
@@ -62,7 +78,7 @@ class Game {
    }
 
    update = () => {
-
+      this.updateStars();
    }
 
    render = () => {
